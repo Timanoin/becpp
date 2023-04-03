@@ -7,3 +7,23 @@ Sonnette Wi-Fi
 
 Builtin LED : 2 / D4
 
+Idées :
+* Tablette de restaurant
+* Choix de plats / boissons / desserts / snacks dans une liste
+* Affichage de la tablette avec un petit écran (I2C)
+* Selection avec des boutons poussoirs
+* Envoi des données en Wi-Fi sur une application du cuisinier
+
+
+Pertinance du CPP
+* Plusieurs classes 
+** (Article -> Boissons, Plats, Desserts, Snacks... -> choix de la quantité, volume, sauces, extras)
+** Prix
+** Menu / Sous-Menu
+** Wifi potentiellement
+* Héritage jlai dit
+
+* Réfinition d'opérateurs <<, >>, +=, [] etc
+* STL vecteurs
+* Exceptions on verra (plus de stock etc)
+
