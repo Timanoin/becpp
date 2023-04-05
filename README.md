@@ -28,3 +28,5 @@ Pertinance du CPP
 * Exceptions on verra (plus de stock etc)
 
 Ecran, 5 boutons avec des couleurs stp
+
+https://wiki.seeedstudio.com/Grove-OLED_Display_1.12inch/
