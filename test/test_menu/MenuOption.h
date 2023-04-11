@@ -3,11 +3,12 @@
 class MenuOption
 {
   protected:
-  std::string txt;
+  std::string text;
   char* icon;
   void (*func_ptr)(void);
 
   public:
   MenuOption();
-  void display(int x, int y);
+  MenuOption(std::string text, char* icon, void (*func_ptr)(void));
+  void display(int Y);
 };

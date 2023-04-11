@@ -1,8 +1,7 @@
 #include "MenuDD.h"
-#include "images/beta.xbm"
-#include "images/omega.xbm"
-#include "images/phi.xbm"
-#include "images/psi.xbm"
+#include <Arduino.h>
+#include <SPI.h>
+#include <U8g2lib.h>
 
 
 MenuDD::MenuDD() : Menu() {}
@@ -40,5 +39,12 @@ void MenuDD::prev(){
 
 void MenuDD::display()
 {
-  
+  u8g2.drawLine(0,0,0,128);
+  u8g2.drawLine(128,0,128,128);
+  for (int i = 0; i < 5; i++)
+  {
+    u8g2.drawLine(0,32*i,128,32*i);
+    // TODO: afficher les options
+  }
+  // TODO: afficher curseur
 }
