@@ -2,7 +2,7 @@
 
 Button::Button(int pin): pin(pin), state(false)
 {
-
+  pinMode(pin, INPUT);
 }
 bool Button::pushed()
 {
@@ -10,18 +10,22 @@ bool Button::pushed()
 }
 void Button::update()
 {
-  if (digitalRead(pin) && !state)
+  if (digitalRead(pin) == HIGH)
   {
-    output = true;
-    state = true;
+    if(!state)
+    {
+      output = true;
+      state = true;
+    }
+    else
+    {  
+      output = false;
+      // state = true;
+    }
   }
-  else if (!digitalRead(pin))
+  else
   {
     output = false;
     state = false;
-  }
-  else{
-    output = false;
-    // state = true;
   }
 }

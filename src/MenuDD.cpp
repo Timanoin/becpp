@@ -5,6 +5,7 @@ MenuDD::MenuDD(SCREEN* u8g2) : Menu(u8g2) {}
 
 void MenuDD::display()
 {
+  int pos = std::distance(listOptions.begin(), cursor);
   MENU_IT it = listOptions.begin();
   for (int i = 0; i < 5; i++)
   {
@@ -19,4 +20,11 @@ void MenuDD::display()
   u8g2->drawLine(0,0,0,127);
   u8g2->drawLine(0,0,127,0);
   u8g2->drawLine(127,0,127,127);
+
+  u8g2.setFont(u8g2_font_unifont_t_symbols);
+  u8g2.drawGlyph(32+2, 32*pos+10, 0x2603);
+  u8g2.drawGlyph(32+2, 32*(pos+1)-10, 0x2603);
+  u8g2.drawGlyph(128-10, 32*pos+10, 0x2603);
+  u8g2.drawGlyph(128-10, 32*(pos+1)-10, 0x2603);
+  
 }
