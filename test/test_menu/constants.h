@@ -1,0 +1,2 @@
+#include <U8g2lib.h>
+typedef U8G2_SH1107_SEEED_128X128_1_SW_I2C SCREEN;

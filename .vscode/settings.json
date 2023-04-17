@@ -21,6 +21,10 @@
     "xstddef": "cpp",
     "xtr1common": "cpp",
     "xutility": "cpp",
-    "*.xbm": "cpp"
+    "*.xbm": "cpp",
+    "cctype": "cpp",
+    "iosfwd": "cpp",
+    "string": "cpp",
+    "xstring": "cpp"
   }
 }

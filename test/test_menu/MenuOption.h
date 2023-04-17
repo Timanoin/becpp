@@ -1,14 +1,18 @@
-#include <string>
+#ifndef __MENUOPTION__
+#define __MENUOPTION__
 
+#include "constants.h"
 class MenuOption
 {
   protected:
-  std::string text;
-  char* icon;
+  const char* text;
+  unsigned char* icon;
   void (*func_ptr)(void);
+  SCREEN* u8g2;
 
   public:
-  MenuOption();
-  MenuOption(std::string text, char* icon, void (*func_ptr)(void));
+  MenuOption(const char* text, unsigned char* icon, void (*func_ptr)(void), SCREEN* u8g2);
   void display(int Y);
 };
+
+#endif

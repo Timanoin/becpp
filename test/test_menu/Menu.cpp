@@ -1,6 +1,15 @@
 #include "Menu.h"
+#include "constants.h"
 
-Menu::Menu() : listOptions(), cursor(listOptions.begin()) {}
+Menu::Menu(SCREEN* u8g2) : listOptions(), cursor(listOptions.begin()) 
+{
+  this->u8g2 = u8g2;
+}
+
+Menu::~Menu()
+{
+  
+}
 
 void Menu::addOption(MenuOption* option)
 {
@@ -9,7 +18,7 @@ void Menu::addOption(MenuOption* option)
 
 void Menu::addOption(MenuOption* option, int pos)
 {
-  menuIt it;
+  MENUIT it;
   for (int i = 0; i < pos; i++)
   {
     it++;
