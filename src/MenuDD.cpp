@@ -5,7 +5,7 @@ MenuDD::MenuDD(SCREEN* u8g2) : Menu(u8g2) {}
 
 void MenuDD::display()
 {
-  MENUIT it = listOptions.begin();
+  MENU_IT it = listOptions.begin();
   for (int i = 0; i < 5; i++)
   {
     // display options

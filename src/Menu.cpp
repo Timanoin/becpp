@@ -18,7 +18,7 @@ void Menu::addOption(MenuOption* option)
 
 void Menu::addOption(MenuOption* option, int pos)
 {
-  MENUIT it;
+  MENU_IT it;
   for (int i = 0; i < pos; i++)
   {
     it++;
