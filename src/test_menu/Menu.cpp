@@ -1,5 +1,6 @@
 #include "Menu.h"
 #include "constants.h"
+#include <typeinfo>
 
 Menu::Menu(SCREEN* u8g2) : listOptions(), cursor(listOptions.begin()) 
 {
@@ -9,6 +10,11 @@ Menu::Menu(SCREEN* u8g2) : listOptions(), cursor(listOptions.begin())
 Menu::~Menu()
 {
   
+}
+
+void Menu::init()
+{
+  cursor = listOptions.begin();
 }
 
 void Menu::addOption(MenuOption* option)
@@ -27,17 +33,41 @@ void Menu::addOption(MenuOption* option, int pos)
 }
 
 void Menu::next(){
-  if (++cursor == listOptions.end()){
+  if (++cursor == listOptions.end())
+  {
     cursor = listOptions.begin();
-  }    
+  }  
 };
 
 void Menu::prev(){
-  if (--cursor == listOptions.begin()){
+  if (cursor == listOptions.begin()){
     cursor = listOptions.end();
+    cursor--;
+  }
+  else
+  {
+    cursor--;
   }
 };
 
 // TODO:
-//void Menu::select();
-//void Menu::back();
+void Menu::select()
+{
+  if (menuPtr != nullptr)
+  {
+    if (typeid(this) == typeid(MenuDD))
+    stackMenu.push(currMenu);
+    currMenu = menuPtr;
+  }
+}
+
+void Menu::back()
+{
+  if (!stackMenu.empty())
+  currMenu = stackMenu.pop();
+}
+
+void setCurrMenu()
+{
+  currMenu = this;
+}

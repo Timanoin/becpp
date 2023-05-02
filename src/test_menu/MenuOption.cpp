@@ -9,5 +9,5 @@ text(text), icon(icon), func_ptr(func_ptr), u8g2(u8g2){};
 void MenuOption::display(int Y)
 {
   u8g2->drawXBM(0,32*Y,32,32,icon);
-  u8g2->drawStr(32,32*Y+24,text);
+  u8g2->drawStr(32+24,32*Y+24,text);
 }

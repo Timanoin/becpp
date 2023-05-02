@@ -25,6 +25,7 @@
     "cctype": "cpp",
     "iosfwd": "cpp",
     "string": "cpp",
-    "xstring": "cpp"
+    "xstring": "cpp",
+    "typeinfo": "cpp"
   }
 }

@@ -21,10 +21,10 @@ void MenuDD::display()
   u8g2->drawLine(0,0,127,0);
   u8g2->drawLine(127,0,127,127);
 
-  u8g2.setFont(u8g2_font_unifont_t_symbols);
-  u8g2.drawGlyph(32+2, 32*pos+10, 0x2603);
-  u8g2.drawGlyph(32+2, 32*(pos+1)-10, 0x2603);
-  u8g2.drawGlyph(128-10, 32*pos+10, 0x2603);
-  u8g2.drawGlyph(128-10, 32*(pos+1)-10, 0x2603);
+  u8g2->setFont(u8g2_font_unifont_t_symbols);
+  u8g2->drawGlyph(32, 32*pos+14, 0x25e4);
+  u8g2->drawGlyph(32, 32*(pos+1)-4, 0x25e3);
+  u8g2->drawGlyph(128-10, 32*pos+14, 0x25e5);
+  u8g2->drawGlyph(128-10, 32*(pos+1)-4, 0x25e2);
   
 }
