@@ -26,6 +26,8 @@
     "iosfwd": "cpp",
     "string": "cpp",
     "xstring": "cpp",
-    "typeinfo": "cpp"
+    "typeinfo": "cpp",
+    "deque": "cpp",
+    "stack": "cpp"
   }
 }

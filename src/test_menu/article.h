@@ -8,19 +8,17 @@
 class Article
 {
   protected:
-  SCREEN* u8g2;
-  int prix;
-  static unsigned char image;
-  String nom;
+  static unsigned char* icon;
+  String name;
+  String desc;
+  int cost;
 
   public:
-  Article(SCREEN* u8g2);
+  Article();
+  Article(static unsigned char* icon, String name, String desc, int cost);
   ~Article();
 
-  
-  void init();
   virtual void display() = 0;
-
 };
 
 #endif

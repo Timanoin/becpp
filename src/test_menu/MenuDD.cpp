@@ -1,8 +1,10 @@
 #include "MenuDD.h"
 #include <U8g2lib.h>
 
-MenuDD::MenuDD(SCREEN* u8g2) : Menu(u8g2) {}
+// Constructor of class Menu Drop Down.
+MenuDD::MenuDD() : Menu() {}
 
+// Display the menu on the screen.
 void MenuDD::display()
 {
   int pos = std::distance(listOptions.begin(), cursor);
@@ -15,16 +17,27 @@ void MenuDD::display()
       (*it)->display(i);
       it++;
     }
-    u8g2->drawLine(0,32*i-1,127,32*i-1);    
+    SCREEN.drawLine(0,32*i-1,127,32*i-1);    
   }
-  u8g2->drawLine(0,0,0,127);
-  u8g2->drawLine(0,0,127,0);
-  u8g2->drawLine(127,0,127,127);
+  SCREEN.drawLine(0,0,0,127);
+  SCREEN.drawLine(0,0,127,0);
+  SCREEN.drawLine(127,0,127,127);
 
-  u8g2->setFont(u8g2_font_unifont_t_symbols);
-  u8g2->drawGlyph(32, 32*pos+14, 0x25e4);
-  u8g2->drawGlyph(32, 32*(pos+1)-4, 0x25e3);
-  u8g2->drawGlyph(128-10, 32*pos+14, 0x25e5);
-  u8g2->drawGlyph(128-10, 32*(pos+1)-4, 0x25e2);
+  SCREEN.setFont(u8g2_font_unifont_t_symbols);
+  SCREEN.drawGlyph(32, 32*pos+14, 0x25e4);
+  SCREEN.drawGlyph(32, 32*(pos+1)-4, 0x25e3);
+  SCREEN.drawGlyph(128-10, 32*pos+14, 0x25e5);
+  SCREEN.drawGlyph(128-10, 32*(pos+1)-4, 0x25e2);
   
+}
+
+// Select an option.
+void MenuDD::select()
+{
+  if ((*cursor)->getMenuPtr() != nullptr)
+  {
+    menuStack.push(*currMenu);
+    (*cursor)->getMenuPtr()->setCurrMenu();
+    Serial.print("Select");
+  }
 }
