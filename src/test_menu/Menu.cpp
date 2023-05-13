@@ -13,13 +13,13 @@ Menu::Menu() : listOptions(), cursor(listOptions.begin()) {}
 Menu::~Menu() {}
 
 // Adds an option to the bottom of the menu.
-void Menu::addOption(MenuOption* option)
+void Menu::addOption(OptionMenu* option)
 {
   listOptions.push_back(option);
 }
 
 // Adds an option at the desired position in the menu.
-void Menu::addOption(MenuOption* option, int pos)
+void Menu::addOption(OptionMenu* option, int pos)
 {
   MENU_IT it;
   for (int i = 0; i < pos; i++)
@@ -63,7 +63,6 @@ void Menu::back()
     Menu* m = menuStack.top();
     m->setCurrMenu();
     menuStack.pop();
-    Serial.print("Back");
   }
 }
 

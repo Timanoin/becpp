@@ -28,6 +28,8 @@
     "xstring": "cpp",
     "typeinfo": "cpp",
     "deque": "cpp",
-    "stack": "cpp"
+    "stack": "cpp",
+    "map": "cpp",
+    "xtree": "cpp"
   }
 }

@@ -2,6 +2,7 @@
 #define __MENUDD__
 
 #include "Menu.h"
+#include "OptionMenuDD.h"
 #include <list>
 
 // The class MenuDD is a subclass of Menu. It provides a drop-down menu for the user.

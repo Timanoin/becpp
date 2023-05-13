@@ -1,5 +1,6 @@
 #include "MenuDD.h"
 #include <U8g2lib.h>
+#include <typeinfo>
 
 // Constructor of class Menu Drop Down.
 MenuDD::MenuDD() : Menu() {}
@@ -34,10 +35,10 @@ void MenuDD::display()
 // Select an option.
 void MenuDD::select()
 {
-  if ((*cursor)->getMenuPtr() != nullptr)
+  if (((OptionMenuDD*)(*cursor))->getMenuPtr() != nullptr)
   {
     menuStack.push(*currMenu);
-    (*cursor)->getMenuPtr()->setCurrMenu();
+    ((OptionMenuDD*)(*cursor))->getMenuPtr()->setCurrMenu();
     Serial.print("Select");
   }
 }

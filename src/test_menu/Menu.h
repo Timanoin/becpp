@@ -1,21 +1,21 @@
 #ifndef __MENU__
 #define __MENU__
 #include "constants.h"
-#include "MenuOption.h"
+#include "OptionMenu.h"
 #include <list>
 #include <stack>
 
-// Redefinition of the std::list<MenuOption*>::iterator class
-typedef std::list<MenuOption*>::iterator MENU_IT;
+// Redefinition of the std::list<OptionMenu*>::iterator class
+typedef std::list<OptionMenu*>::iterator MENU_IT;
 
-class MenuOption;
+class OptionMenu;
 
 // The Menu class allows the user to create, manage and display a menu. 
 class Menu
 {
   protected:
   // List of options of the menu.
-  std::list<MenuOption*> listOptions;
+  std::list<OptionMenu*> listOptions;
   // Current position of the cursor in the menu.
   MENU_IT cursor;
 
@@ -26,16 +26,16 @@ class Menu
   ~Menu();
 
   // Adds an option to the bottom of the menu.
-  void addOption(MenuOption* option);
+  void addOption(OptionMenu* option);
   // Adds an option at the desired position in the menu.
-  void addOption(MenuOption* option, int pos);
+  void addOption(OptionMenu* option, int pos);
   // Call this in the setup part of the program to properly initialize the menu *after* adding options.
-  void init();
+  virtual void init();
 
   // Moves the cursor to the next option in the list.
-  void next();
+  virtual void next();
   // Moves the cursor to the previous option in the list.
-  void prev();
+  virtual void prev();
   // Selects the option in the menu. Depending on the menu, this function may have different behaviors
   virtual void select() = 0;
   // Goes back one layer in the menu.
