@@ -30,6 +30,27 @@
     "deque": "cpp",
     "stack": "cpp",
     "map": "cpp",
-    "xtree": "cpp"
+    "xtree": "cpp",
+    "atomic": "cpp",
+    "clocale": "cpp",
+    "cmath": "cpp",
+    "ctime": "cpp",
+    "iomanip": "cpp",
+    "ios": "cpp",
+    "istream": "cpp",
+    "iterator": "cpp",
+    "memory": "cpp",
+    "ostream": "cpp",
+    "sstream": "cpp",
+    "stdexcept": "cpp",
+    "streambuf": "cpp",
+    "system_error": "cpp",
+    "xfacet": "cpp",
+    "xiosbase": "cpp",
+    "xlocale": "cpp",
+    "xlocinfo": "cpp",
+    "xlocmon": "cpp",
+    "xlocnum": "cpp",
+    "xloctime": "cpp"
   }
 }

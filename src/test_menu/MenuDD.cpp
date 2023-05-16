@@ -24,12 +24,12 @@ void MenuDD::display()
   SCREEN.drawLine(0,0,127,0);
   SCREEN.drawLine(127,0,127,127);
 
-  SCREEN.setFont(u8g2_font_unifont_t_symbols);
-  SCREEN.drawGlyph(32, 32*pos+14, 0x25e4);
-  SCREEN.drawGlyph(32, 32*(pos+1)-4, 0x25e3);
-  SCREEN.drawGlyph(128-10, 32*pos+14, 0x25e5);
-  SCREEN.drawGlyph(128-10, 32*(pos+1)-4, 0x25e2);
-  
+  SCREEN_SYMBOL_FONT();
+  SCREEN.drawGlyph(32, 32*pos+13, 0x25e4);
+  SCREEN.drawGlyph(32, 32*(pos+1)-3, 0x25e3);
+  SCREEN.drawGlyph(128-10, 32*pos+13, 0x25e5);
+  SCREEN.drawGlyph(128-10, 32*(pos+1)-3, 0x25e2);
+  SCREEN_RESET_FONT();
 }
 
 // Select an option.

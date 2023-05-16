@@ -1,9 +1,9 @@
 #include "Food.h"
 
-Food::Food(const char* name, unsigned char* icon, const char* desc, float cost) : 
-           name(name), icon(icon), desc(desc), cost(cost)
+Food::Food(const char* name, unsigned char* icon, const char* desc1, const char* desc2, float cost) : 
+           name(name), icon(icon), desc1(desc1), desc2(desc2), cost(cost)
 {
-  quantity = new unsigned int(0);
+  quantity = new int(0);
 }
 Food::~Food()
 {
@@ -18,15 +18,19 @@ unsigned char* Food::getIcon()
 {
   return icon;
 }
-const char* Food::getDesc()
+const char* Food::getDesc1()
 {
-  return desc;
+  return desc1;
+}
+const char* Food::getDesc2()
+{
+  return desc2;
 }
 float Food::getCost()
 {
   return cost;
 }
-unsigned int* Food::getQuantity()
+int* Food::getQuantity()
 {
   return quantity;
 }

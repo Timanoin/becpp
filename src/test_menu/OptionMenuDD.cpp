@@ -7,7 +7,7 @@ OptionMenuDD::OptionMenuDD(const char* text, unsigned char* icon, Menu* menuPtr)
 void OptionMenuDD::display(int Y)
 {
   SCREEN.drawXBM(0,32*Y,32,32,icon);
-  SCREEN.drawStr(32+24,32*Y+24,text);
+  SCREEN.drawStr(32+16,32*Y+20,text);
 }
 
 // Get the next menu pointer.

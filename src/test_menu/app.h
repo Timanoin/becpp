@@ -103,7 +103,7 @@ String SendHTML(int t, String panier){
   ptr +="<body>\n";
   ptr +="<h1>TABLE 1</h1>\n";
   ptr +="<h3>COMMANDE :</h3>\n";
-  // affichage de la panier
+  // affichage du panier
   ptr +="<h3>" + (String)panier + "</h3>\n";
   ptr +="<h3>Temps estim&eacute :</h3>\n";
   

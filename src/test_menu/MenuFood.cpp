@@ -27,6 +27,6 @@ void MenuFood::select()
   {
     menuStack.push(*currMenu);
     ((OptionMenuFood*)(*cursor))->getMenuPtr()->setCurrMenu();
-    Serial.print("Select");
+    ((MenuSelect*)(*currMenu))->open();
   }
 }

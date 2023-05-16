@@ -6,18 +6,20 @@ class Food
   private:
   const char* name; 
   unsigned char* icon;
-  const char* desc;
+  const char* desc1;
+  const char* desc2;
   float cost;
-  unsigned int* quantity;
+  int* quantity;
 
   public:
-  Food(const char* name, unsigned char* icon, const char* desc, float price);
+  Food(const char* name, unsigned char* icon, const char* desc1, const char* desc2, float price);
   ~Food();
   const char* getName();
   unsigned char* getIcon();
-  const char* getDesc();
+  const char* getDesc1();
+  const char* getDesc2();
   float getCost();
-  unsigned int* getQuantity();
+  int* getQuantity();
 };
 
 #endif
