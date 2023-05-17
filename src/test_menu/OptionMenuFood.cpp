@@ -31,3 +31,7 @@ Menu* OptionMenuFood::getMenuPtr()
 {
   return menuPtr;
 }
+void OptionMenuFood::executeFuncPtr()
+{
+  
+}

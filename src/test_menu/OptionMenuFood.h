@@ -21,6 +21,7 @@ class OptionMenuFood : public OptionMenu
   virtual void display(int Y);
   // Get the next menu pointer.
   Menu* getMenuPtr();
+  virtual void executeFuncPtr();
 };
 
 #endif

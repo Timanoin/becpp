@@ -31,10 +31,12 @@ std::string cart_string = "";
 int temps_estime = 0;
 int pbm1 = 0;
 
+bool sent_command = false;
+
 //-------------------------------------------------//
 //                  OTHER OBJECTS                  //
 //-------------------------------------------------//
-U8G2_SH1107_SEEED_128X128_F_SW_I2C SCREEN(U8G2_R0, /* clock=*/ SCL, /* data=*/ SDA, /* reset=*/ U8X8_PIN_NONE);
+U8G2_SH1107_SEEED_128X128_1_SW_I2C SCREEN(U8G2_R0, /* clock=*/ SCL, /* data=*/ SDA, /* reset=*/ U8X8_PIN_NONE);
 
 std::map<int, Food*> CART;
 
@@ -54,7 +56,7 @@ Food glace("Glace", glace_bits, "Cornet vanille", "chocolat", 6.00);
 Food cookie("Cookie", cookie_bits, "Cookie", "max size", 4.00);
 Food enfant("Enfant", burger_bits, "Burger, frites,", "glace, cola", 15.00);
 Food vegetarien("Vege", salade_bits, "Salade, pizza,", "cookie, cola", 21.50);
-Food jour("Du Jour", cola_bits, "Jambon, pates,", "gateau, cafe", 18.50);
+Food jour("Du Jour", pates_bits, "Jambon, pates,", "gateau, cafe", 18.50);
 
 MenuFood boissons_menu;
 OptionMenuFood cola_option(COLA);
@@ -79,15 +81,17 @@ OptionMenuFood enfant_option(MENF);
 OptionMenuFood vegetarien_option(MVEGE);
 OptionMenuFood classique_option(MJOUR);
 MenuDD carte_menu;
-OptionMenuDD entrees_option("Entrees", entrees_bits, &entrees_menu);
-OptionMenuDD plats_option("Plats", plats_bits, &plats_menu);
-OptionMenuDD desserts_option("Desserts", desserts_bits, &desserts_menu);
-OptionMenuDD boissons_option("Boissons", boissons_bits, &boissons_menu);
+OptionMenuDD entrees_option( "Entrees" , entrees_bits , &entrees_menu , nullptr);
+OptionMenuDD plats_option(   "Plats"   , plats_bits   , &plats_menu   , nullptr);
+OptionMenuDD desserts_option("Desserts", desserts_bits, &desserts_menu, nullptr);
+OptionMenuDD boissons_option("Boissons", boissons_bits, &boissons_menu, nullptr);
 MenuCart panier_menu;
 MenuDD main_menu;
-OptionMenuDD carte_option("Carte", carte_bits, &carte_menu);
-OptionMenuDD menus_option("Menus", menus_bits, &menus_menu);
-OptionMenuDD panier_option("Panier", panier_bits, &panier_menu);
+OptionMenuDD carte_option("Carte"  , carte_bits , &carte_menu , nullptr);
+OptionMenuDD menus_option("Menus"  , menus_bits , &menus_menu , nullptr);
+OptionMenuDD panier_option("Panier", panier_bits, &panier_menu, nullptr);
+void sendCommand();
+OptionMenuDD sendcommand_option("Commander", dollar_bits, nullptr, sendCommand);
 
 Button bnext(PIN_BUTTON_NEXT);
 Button bprev(PIN_BUTTON_PREV);
@@ -98,6 +102,7 @@ void setup(void) {
 //-------------------------------------------------//
 //                SERVER CONNECTION                //
 //-------------------------------------------------//
+  WiFi.mode(WIFI_AP);
   Serial.begin(115200);
   //lancement du serveur wifi
   WiFi.softAP(ssid, password);
@@ -139,6 +144,7 @@ void setup(void) {
   main_menu.addOption(&carte_option);
   main_menu.addOption(&menus_option);
   main_menu.addOption(&panier_option);
+  main_menu.addOption(&sendcommand_option);
   carte_menu.addOption(&entrees_option);
   carte_menu.addOption(&plats_option);
   carte_menu.addOption(&desserts_option);
@@ -171,12 +177,11 @@ void setup(void) {
 }
 
 void loop(void) {
-  SCREEN.clearBuffer();
 //-------------------------------------------------//
 //                  SERVER START                   //
 //-------------------------------------------------//
   server.handleClient();
-  
+  Serial.println("loop");
 //-------------------------------------------------//
 //                  OTHER OBJECTS                  //
 //-------------------------------------------------//
@@ -204,6 +209,8 @@ void loop(void) {
   {
     (*Menu::currMenu)->back();
   }
+  SCREEN.firstPage();
+  do {
   // display menu
   (*Menu::currMenu)->display(); 
   // decoration
@@ -212,19 +219,18 @@ void loop(void) {
   SCREEN.drawLine(127,0,127,127);
   SCREEN.drawLine(0,127,127,127);
   // send image to screen
-  SCREEN.sendBuffer(); 
+  } while ( SCREEN.nextPage() ); 
 }
 
 
 
 std::string format_cart()
 {
-  cart_string = "";
-  cart_string += "<table>\n <thead>\n <tr>\n <th colspan=\"2\">Commande borne 1</th>\n </tr>\n </thead>\n";
+  cart_string = "<table>\n <thead>\n <tr>\n <th colspan=\"2\">Commande borne 1</th>\n </tr>\n </thead>\n";
   cart_string += "<tbody>\n";
   for (int i = 0; i < IDLAST;  i++)
   {
-    if (i > 0)
+    if (*(CART[i]->getQuantity()) > 0)
     {
       cart_string += "<tr>\n";
       cart_string += "<td> ";
@@ -242,31 +248,31 @@ std::string format_cart()
 
 
 void handle_OnConnect() {  
-  server.send(200, "text/html", SendHTML(temps_estime)); 
+  server.send(200, "text/html", (String)(SendHTML(temps_estime).c_str())); 
 }
 
 void t_5() {
   temps_estime = 5;
   pbm1 = 0;
-  server.send(200, "text/html", SendHTML(temps_estime)); 
+  server.send(200, "text/html", (String)(SendHTML(temps_estime).c_str())); 
 }
 
 void t_10() {
   temps_estime = 10;
   pbm1 = 0;
-  server.send(200, "text/html", SendHTML(temps_estime)); 
+  server.send(200, "text/html", (String)(SendHTML(temps_estime).c_str())); 
 }
 
 void t_20() {
   temps_estime = 20;
   pbm1 = 0;
-  server.send(200, "text/html", SendHTML(temps_estime)); 
+  server.send(200, "text/html", (String)(SendHTML(temps_estime).c_str())); 
 }
 
 void pbm() {
  
-  pbm1 = 1;;
-  server.send(200, "text/html", SendHTML(temps_estime)); 
+  pbm1 = 1;
+  server.send(200, "text/html", (String)(SendHTML(temps_estime).c_str())); 
 }
 
 
@@ -274,8 +280,8 @@ void handle_NotFound(){
   server.send(404, "text/plain", "Not found");
 }
 
-String SendHTML(int temps_estime){
-  String ptr = "<!DOCTYPE html> <html>\n";
+std::string SendHTML(int temps_estime){
+  std::string ptr = "<!DOCTYPE html> <html>\n";
   ptr +="<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\">\n";
   ptr +="<title>CART TABLE 1</title>\n";
   ptr +="<meta http-equiv=refresh content=20>";
@@ -290,12 +296,15 @@ String SendHTML(int temps_estime){
   ptr +="</style>\n";
   ptr +="</head>\n";
   ptr +="<body>\n";
-  ptr +="<h1>TABLE 1</h1>\n";
-  ptr +="<h3>COMMANDE :</h3>\n";
-  // affichage du panier
-  ptr +="<h3>";
-  ptr += format_cart().c_str() ;
-  ptr += "</h3>\n";
+  if (sent_command)
+  {
+    ptr +="<h1>TABLE 1</h1>\n";
+    ptr +="<h3>COMMANDE :</h3>\n";
+    // affichage du panier
+    ptr +="<h3>";
+    ptr += format_cart().c_str() ;
+    ptr += "</h3>\n";
+  }
   ptr +="<h3>Temps estim&eacute :</h3>\n";
   
   // Bouton pour choisir la durée
@@ -320,4 +329,16 @@ String SendHTML(int temps_estime){
   ptr +="</body>\n";
   ptr +="</html>\n";
   return ptr;
+}
+
+void sendCommand()
+{
+  if (sent_command) 
+  {
+    sent_command = false;
+  }
+  else
+  {
+    sent_command = true;
+  }
 }

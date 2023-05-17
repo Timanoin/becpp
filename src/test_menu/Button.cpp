@@ -16,7 +16,9 @@ bool Button::pushed()
 // Call this at every loop when using a button
 void Button::update()
 {
-  if (digitalRead(pin) == HIGH)
+  bool read_value = digitalRead(pin);
+  delay(5);
+  if (read_value == HIGH)
   {
     if(!state)
     {

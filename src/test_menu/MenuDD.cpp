@@ -35,6 +35,7 @@ void MenuDD::display()
 // Select an option.
 void MenuDD::select()
 {
+  (*cursor)->executeFuncPtr();
   if (((OptionMenuDD*)(*cursor))->getMenuPtr() != nullptr)
   {
     menuStack.push(*currMenu);

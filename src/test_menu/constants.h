@@ -12,7 +12,7 @@
 #define PIN_BUTTON_BACK D8
 
 // Screen
-extern U8G2_SH1107_SEEED_128X128_F_SW_I2C SCREEN;
+extern U8G2_SH1107_SEEED_128X128_1_SW_I2C SCREEN;
 #define SCREEN_RESET_FONT()  SCREEN.setFont(u8g2_font_amstrad_cpc_extended_8f)
 #define SCREEN_SYMBOL_FONT() SCREEN.setFont(u8g2_font_unifont_t_symbols)
 
@@ -26,5 +26,4 @@ enum FoodID {COLA, ICETEA, FANTA, CAFE,
       MENF, MVEGE, MJOUR,
       // do not add any IDs after this point
       IDLAST};
-
 #endif

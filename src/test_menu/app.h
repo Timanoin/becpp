@@ -16,6 +16,8 @@ String panier = "aucune";
 int t = 0;
 int pbm1 = 0;
 
+bool sent_command = false;
+
 
 //--------fonction initialisation (exécuté qu'une fois au lancement du programme)
 void setup() {
@@ -101,10 +103,13 @@ String SendHTML(int t, String panier){
   ptr +="</style>\n";
   ptr +="</head>\n";
   ptr +="<body>\n";
-  ptr +="<h1>TABLE 1</h1>\n";
-  ptr +="<h3>COMMANDE :</h3>\n";
-  // affichage du panier
-  ptr +="<h3>" + (String)panier + "</h3>\n";
+  if (sent_command)
+  {
+    ptr +="<h1>TABLE 1</h1>\n";
+    ptr +="<h3>COMMANDE :</h3>\n";
+    // affichage du panier
+    ptr +="<h3>" + (String)panier + "</h3>\n";
+  }
   ptr +="<h3>Temps estim&eacute :</h3>\n";
   
   // Bouton pour choisir la durée

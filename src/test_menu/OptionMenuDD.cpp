@@ -1,7 +1,7 @@
 #include "OptionMenuDD.h"
 #include "constants.h"
 
-OptionMenuDD::OptionMenuDD(const char* text, unsigned char* icon, Menu* menuPtr) : OptionMenu(text, icon), menuPtr(menuPtr) {}
+OptionMenuDD::OptionMenuDD(const char* text, unsigned char* icon, Menu* menuPtr, void (*funcPtr)(void)) : OptionMenu(text, icon), menuPtr(menuPtr), funcPtr(funcPtr) {}
 
 // Display the option on the screen.
 void OptionMenuDD::display(int Y)
@@ -19,4 +19,12 @@ Menu* OptionMenuDD::getMenuPtr()
 void OptionMenuDD::init()
 {
 
+}
+
+void OptionMenuDD::executeFuncPtr()
+{
+  if (funcPtr != nullptr)
+  {
+    funcPtr();
+  }
 }

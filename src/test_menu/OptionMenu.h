@@ -21,6 +21,7 @@ class OptionMenu
   // Display the option on the screen.
   virtual void display(int Y) = 0;
   virtual void init() = 0;
+  virtual void executeFuncPtr() = 0;
 };
 
 #endif
