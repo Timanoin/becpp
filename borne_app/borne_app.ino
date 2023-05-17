@@ -185,8 +185,6 @@ void loop(void) {
 //-------------------------------------------------//
 //                  OTHER OBJECTS                  //
 //-------------------------------------------------//
-
-
   SCREEN_RESET_FONT();
   bnext.update();
   bprev.update();
@@ -197,14 +195,17 @@ void loop(void) {
   {
     (*Menu::currMenu)->next();
   }
+  // move cursor down
   else if (bprev.pushed())
   {
     (*Menu::currMenu)->prev();
   }
+  // move cursor up
   else if (bselect.pushed())
   {
     (*Menu::currMenu)->select();
   }
+  // go back 1 layer of menu
   else if (bback.pushed())
   {
     (*Menu::currMenu)->back();
@@ -221,8 +222,6 @@ void loop(void) {
   // send image to screen
   } while ( SCREEN.nextPage() ); 
 }
-
-
 
 std::string format_cart()
 {
